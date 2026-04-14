@@ -13,7 +13,17 @@
     <h1>Electricity Tracker</h1>
 
     <div class="settings-bar">
+      <button id="settings-toggle" class="btn btn-small">Settings</button>
       <span id="sync-status" class="sync-status">Local only</span>
+    </div>
+
+    <div id="settings-panel" class="settings-panel hidden">
+      <p>Enter your GitHub personal access token to sync data. The token is stored in your browser only — it never gets committed to the repo.</p>
+      <label>GitHub Token <input type="password" id="gh-token" placeholder="github_pat_..."></label>
+      <div class="settings-actions">
+        <button id="save-token" class="btn">Save & Sync</button>
+        <button id="clear-token" class="btn btn-danger">Disconnect</button>
+      </div>
     </div>
 
     <div class="stats-row" id="stats-row">
