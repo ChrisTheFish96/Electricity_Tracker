@@ -91,9 +91,10 @@ function getGHConfig() {
 }
 
 async function ghFetch(config) {
-  const url = `https://api.github.com/repos/${config.repo}/contents/${config.path}?ref=${config.branch}`;
+  const url = `https://api.github.com/repos/${config.repo}/contents/${config.path}?ref=${config.branch}&_=${Date.now()}`;
   const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${config.token}`, Accept: 'application/vnd.github.v3+json' }
+    headers: { Authorization: `Bearer ${config.token}`, Accept: 'application/vnd.github.v3+json' },
+    cache: 'no-store'
   });
   if (!res.ok) throw new Error(`GitHub fetch failed: ${res.status}`);
   const json = await res.json();
