@@ -82,7 +82,7 @@ function loadLocal() {
 
 // --- GitHub API ---
 function getGHConfig() {
-  const token = CONFIG.githubToken;
+  const token = localStorage.getItem('gh-token');
   const repo = CONFIG.githubRepo;
   const branch = CONFIG.githubBranch || 'main';
   const path = CONFIG.csvPath || 'data.csv';
@@ -402,6 +402,27 @@ function render() {
 }
 
 // --- Events ---
+document.getElementById('settings-toggle').addEventListener('click', () => {
+  const panel = document.getElementById('settings-panel');
+  panel.classList.toggle('hidden');
+  document.getElementById('gh-token').value = localStorage.getItem('gh-token') || '';
+});
+
+document.getElementById('save-token').addEventListener('click', async () => {
+  localStorage.setItem('gh-token', document.getElementById('gh-token').value.trim());
+  const ok = await syncFromGitHub();
+  updateSyncStatus(ok);
+  if (ok) render();
+  document.getElementById('settings-panel').classList.add('hidden');
+});
+
+document.getElementById('clear-token').addEventListener('click', () => {
+  localStorage.removeItem('gh-token');
+  currentSHA = null;
+  updateSyncStatus(false);
+  document.getElementById('settings-panel').classList.add('hidden');
+});
+
 // Chart mode toggle
 document.querySelectorAll('.chart-toggle').forEach(btn => {
   btn.addEventListener('click', () => {
