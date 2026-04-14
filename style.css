@@ -42,6 +42,45 @@ h2 {
   color: #3fb950;
 }
 
+.settings-panel {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.settings-panel p {
+  font-size: 0.85rem;
+  color: #8b949e;
+  margin-bottom: 1rem;
+}
+
+.settings-panel label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  color: #c9d1d9;
+}
+
+.settings-panel input {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #e1e4e8;
+  font-size: 0.9rem;
+}
+
+.settings-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
 .hidden { display: none; }
 
 /* Stats row */
