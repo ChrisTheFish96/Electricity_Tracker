@@ -145,10 +145,12 @@ async function syncToGitHub() {
   const config = getGHConfig();
   if (!config) return;
   try {
+    // Always get the latest SHA right before pushing
     const { sha } = await ghFetch(config);
-    currentSHA = sha;
-    const result = await ghPush(config, toCSV(entries), currentSHA);
-    currentSHA = result.content.sha;
+    await ghPush(config, toCSV(entries), sha);
+    // Re-fetch to get the correct SHA for next operation
+    const updated = await ghFetch(config);
+    currentSHA = updated.sha;
     updateSyncStatus(true);
   } catch (e) {
     console.error('GitHub push failed:', e);
