@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electricity Tracker</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Electricity Tracker</h1>
+
+    <div class="settings-bar">
+      <span id="sync-status" class="sync-status">Local only</span>
+    </div>
+
+    <div class="stats-row" id="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Latest Reading</div>
+        <div class="stat-value" id="stat-latest">--</div>
+        <div class="stat-sub" id="stat-latest-date">--</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Avg Daily Rate</div>
+        <div class="stat-value" id="stat-avg-rate">--</div>
+        <div class="stat-sub">kWh / day</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Trend</div>
+        <div class="stat-value" id="stat-trend">--</div>
+        <div class="stat-sub" id="stat-trend-label">vs previous period</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Readings</div>
+        <div class="stat-value" id="stat-count">--</div>
+        <div class="stat-sub" id="stat-span">--</div>
+      </div>
+    </div>
+
+    <div class="chart-controls">
+      <button class="chart-toggle active" data-mode="kwh">kWh (raw)</button>
+      <button class="chart-toggle" data-mode="rate">kWh / day</button>
+      <button class="chart-toggle" data-mode="both">Both</button>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="chart"></canvas>
+    </div>
+
+    <div class="add-entry">
+      <h2>Add Reading</h2>
+      <form id="entry-form">
+        <label>Date <input type="date" id="entry-date" required></label>
+        <label>Time <input type="time" id="entry-time" required></label>
+        <label>kWh <input type="number" id="entry-kwh" step="0.1" min="0" required></label>
+        <label>Note <input type="text" id="entry-note" placeholder="What changed?"></label>
+        <button type="submit" class="btn">Add</button>
+      </form>
+    </div>
+
+    <div class="data-table-section">
+      <h2>All Readings</h2>
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th>Date & Time</th>
+            <th>kWh</th>
+            <th>kWh/day</th>
+            <th>Elapsed</th>
+            <th>Note</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="import-export">
+      <button id="export-csv" class="btn btn-small">Export CSV</button>
+      <label class="btn btn-small file-label">
+        Import CSV <input type="file" id="import-csv" accept=".csv" hidden>
+      </label>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

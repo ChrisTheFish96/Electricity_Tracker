@@ -1,0 +1,262 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0f1117;
+  color: #e1e4e8;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #58a6ff;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #8b949e;
+}
+
+/* Settings */
+.settings-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.sync-status {
+  font-size: 0.85rem;
+  color: #8b949e;
+}
+
+.sync-status.connected {
+  color: #3fb950;
+}
+
+.hidden { display: none; }
+
+/* Stats row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e1e4e8;
+}
+
+.stat-sub {
+  font-size: 0.75rem;
+  color: #8b949e;
+  margin-top: 0.2rem;
+}
+
+.stat-value.trend-up { color: #f85149; }
+.stat-value.trend-down { color: #3fb950; }
+.stat-value.trend-flat { color: #8b949e; }
+
+/* Chart controls */
+.chart-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.chart-toggle {
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  background: #21262d;
+  color: #8b949e;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.chart-toggle:hover {
+  background: #30363d;
+  color: #e1e4e8;
+}
+
+.chart-toggle.active {
+  background: #1f6feb;
+  color: #fff;
+  border-color: #1f6feb;
+}
+
+/* Chart */
+.chart-wrapper {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+/* Form */
+.add-entry {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+#entry-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2fr auto;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+#entry-form label {
+  font-size: 0.85rem;
+  color: #8b949e;
+}
+
+#entry-form input {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #e1e4e8;
+  font-size: 0.9rem;
+}
+
+/* Table */
+.data-table-section {
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #21262d;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+th {
+  color: #8b949e;
+  font-weight: 600;
+}
+
+tr:hover td {
+  background: #161b22;
+}
+
+td:last-child {
+  width: 3rem;
+  text-align: center;
+}
+
+td .rate-value {
+  color: #58a6ff;
+  font-weight: 600;
+}
+
+td .elapsed {
+  color: #8b949e;
+  font-size: 0.8rem;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #f85149;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.delete-btn:hover {
+  background: rgba(248, 81, 73, 0.15);
+}
+
+/* Buttons */
+.btn {
+  padding: 0.5rem 1.1rem;
+  background: #238636;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn:hover { background: #2ea043; }
+
+.btn-small {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.8rem;
+  background: #30363d;
+}
+
+.btn-small:hover { background: #484f58; }
+
+.btn-danger { background: #da3633; }
+.btn-danger:hover { background: #f85149; }
+
+.import-export {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.file-label {
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .stats-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  #entry-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  #entry-form label:nth-child(4) {
+    grid-column: 1 / -1;
+  }
+  #entry-form button {
+    grid-column: 1 / -1;
+  }
+}
