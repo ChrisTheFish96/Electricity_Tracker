@@ -142,20 +142,27 @@ async function syncFromGitHub() {
   }
 }
 
-async function syncToGitHub() {
+async function syncToGitHub(retries = 2) {
   const config = getGHConfig();
   if (!config) return;
-  try {
-    // Always get the latest SHA right before pushing
-    const { sha } = await ghFetch(config);
-    await ghPush(config, toCSV(entries), sha);
-    // Re-fetch to get the correct SHA for next operation
-    const updated = await ghFetch(config);
-    currentSHA = updated.sha;
-    updateSyncStatus(true);
-  } catch (e) {
-    console.error('GitHub push failed:', e);
-    updateSyncStatus(false, e.message);
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      // Fetch the current SHA right before pushing
+      const { sha } = await ghFetch(config);
+      const result = await ghPush(config, toCSV(entries), sha);
+      // Use the SHA returned by the push for the next operation
+      currentSHA = result.content.sha;
+      updateSyncStatus(true);
+      return;
+    } catch (e) {
+      if (attempt < retries && e.message.includes('does not match')) {
+        // SHA conflict — wait briefly for GitHub to settle, then retry
+        await new Promise(r => setTimeout(r, 1000));
+        continue;
+      }
+      console.error('GitHub push failed:', e);
+      updateSyncStatus(false, e.message);
+    }
   }
 }
 
